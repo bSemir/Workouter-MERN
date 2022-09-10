@@ -4,7 +4,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const workoutRoutes = require('./routes/workouts');
 
-const app = express();  //express app
+const app = express();  //express app, logicno
 
 //simple middleware that fires up every time we send request 
 app.use((req, res, next) => {
