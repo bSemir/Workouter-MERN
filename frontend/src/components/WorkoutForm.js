@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
+import { useWorkoutsContext } from '../hooks/useWorkoutsContext';
 
 const WorkoutForm = () => {
+    const { dispatch } = useWorkoutsContext(); //destructure dispatch from useWorkoutsContext hook
     const [title, setTitle] = useState('');
     const [load, setLoad] = useState('');
     const [reps, setReps] = useState('');
@@ -26,7 +28,11 @@ const WorkoutForm = () => {
             setLoad('');
             setReps('');
             setError(null);
-            // console.log('new workout added', json);
+
+            /* bitno: when we've added a new workout from our form,
+            we needed to dispatch an action which is going to update our context state as well(add new workout to global context state),
+            that way we are keeping up UI in sync with db!! */
+            dispatch({ type: 'CREATE_WORKOUT', payload: json });
         }
     }
 
