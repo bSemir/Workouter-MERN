@@ -19,7 +19,7 @@ const Home = () => {
             //dispatch fires up workoutsReducer...
         }
         fetchWorkouts();
-    }, [])
+    }, [dispatch]) //whenever dispatch f changes, it reruns useEffect
 
     return (
         <div className="home">
