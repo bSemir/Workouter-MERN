@@ -1,7 +1,7 @@
 # Workouter-MERN
 MERN stack application for keeping track of your workout exercises.
 #
-It's a part of my learning journey where I want to get a better grasp of full stack web development, primarly using youtube as a resource.
+It's a part of my learning journey where I want to get a better grasp of full stack web development, primarly using youtube tutorials as a resource for this one.
 
 Used: MongoDB, Express, React, Node, Mongoose, React Context, date-fns..
 #
