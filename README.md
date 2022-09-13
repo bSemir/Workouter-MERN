@@ -8,4 +8,9 @@ Used: MongoDB, Express, React, Node, Mongoose, React Context, date-fns..
 I will add JWT Authentication to this project later on.
 ##
 So far, it looks like this:
-![workouter](https://user-images.githubusercontent.com/80484175/189506681-a8911902-b03b-4e6b-8832-1870e61c1b2c.png)
+![workouter1](https://user-images.githubusercontent.com/80484175/189938033-237826ca-09e2-440e-9e8e-1b1efcc29860.png)
+
+![workouter2](https://user-images.githubusercontent.com/80484175/189938259-627767ce-aff4-4730-bcb4-9879c27bfecb.png)
+
+
+
