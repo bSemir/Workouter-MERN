@@ -3,22 +3,27 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 //pages && components
 import Home from './pages/Home'
 import Navbar from './components/Navbar';
+import WorkoutEdit from "./components/WorkoutEdit"
 
 function App() {
   return (
     <div className="App">
       {/* everything to do with routes needs to be inside this - BrowserRouter*/}
-     <BrowserRouter> 
-      <Navbar />
-     <div className='pages'>
-      <Routes>
-        <Route
-          path='/'
-          element={<Home />}
-        />
-      </Routes>
-     </div>
-     </BrowserRouter>
+      <BrowserRouter>
+        <Navbar />
+        <div className='pages'>
+          <Routes>
+            <Route
+              path='/'
+              element={<Home />}
+            />
+            <Route path="/api/workouts/:id"
+              element={<WorkoutEdit />}>
+            </Route>
+          </Routes>
+        </div>
+
+      </BrowserRouter>
     </div>
   );
 }

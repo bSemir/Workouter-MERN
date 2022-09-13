@@ -1,49 +1,67 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useWorkoutsContext } from '../hooks/useWorkoutsContext';
+import { useNavigate, useParams } from "react-router-dom";
 
-const WorkoutForm = () => {
-    const { dispatch } = useWorkoutsContext(); //destructure dispatch from useWorkoutsContext hook
+const WorkoutEdit = () => {
     const [title, setTitle] = useState('');
     const [load, setLoad] = useState('');
     const [reps, setReps] = useState('');
     const [error, setError] = useState(null);
     const [emptyFields, setEmptyFields] = useState([]);
+    const { id } = useParams();
 
-    const handleSubmit = async (e) => {
+    const navigate = useNavigate();
+    const { dispatch } = useWorkoutsContext();
+
+    useEffect(() => {
+        const fetchWorkouts = async () => {
+            const response = await fetch('/api/workouts/' + id,);
+            const json = await response.json();
+            //json is array of objects
+            if (response.ok) {
+                console.log(json);
+                setTitle(json.title);
+                setLoad(json.load);
+                setReps(json.reps);
+            }
+        }
+        fetchWorkouts();
+    }, [dispatch, id]) //whenever dispatch f changes, it reruns useEffect
+
+    const handleUpdate = async (e) => {
         e.preventDefault();
 
-        const workout = { title, load, reps };
-        const response = await fetch('/api/workouts', {
-            method: 'POST',
-            body: JSON.stringify(workout),
+        const data = { title, reps, load };
+
+        const response = await fetch('/api/workouts/' + id, {
+            method: 'PATCH',
+            body: JSON.stringify(data),
             headers: {
                 'Content-Type': 'application/json'
             }
         });
-        const json = await response.json();
+
+        const json = await response.json(); //document that was returned from db
 
         if (!json.ok) {
             setError(json.error);
             setEmptyFields(json.empty_fields);
         }
+
         if (response.ok) {
-            setTitle('');
-            setLoad('');
-            setReps('');
+            console.log(json);
             setError(null);
             setEmptyFields([]);
+            dispatch({ type: 'PATCH_WORKOUT', payload: json });
 
-            /* bitno: when we've added a new workout from our form,
-            we needed to dispatch an action which is going to update our context state as well(add new workout to global context state),
-            that way we are keeping up UI in sync with db!! */
-            dispatch({ type: 'CREATE_WORKOUT', payload: json });
+            navigate('/', { replace: true });
         }
     }
 
     return (
-        <form className="create" onSubmit={handleSubmit}>
-            <h3>Add a New Workout</h3>
-            <label>Exercise Title:</label>
+        <form className="create" onSubmit={handleUpdate}>
+            <h3>Update Your workout</h3>
+            <label>Excercise Title:</label>
             <input
                 type="text"
                 onChange={(e) => setTitle(e.target.value)}
@@ -67,10 +85,10 @@ const WorkoutForm = () => {
                 className={emptyFields.includes('reps') ? 'error' : ''}
             />
 
-            <button>Add Workout</button>
+            <button>Update</button>
             {error && <div className='error'>{error}</div>}
         </form>
     )
 }
 
-export default WorkoutForm
+export default WorkoutEdit

@@ -65,6 +65,15 @@ header a {
   color: #555;
 }
 
+#link{
+  /* position: right; doesn't work :( */
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  font-size: 0.9em;
+  color: rgb(6, 201, 126);
+}
+
 .workout-details span {
   position: absolute;
   top: 20px;

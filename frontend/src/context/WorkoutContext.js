@@ -16,6 +16,10 @@ export const workoutsReducer = (state, action) => {
             return {
                 workouts: state.workouts.filter((w) => w._id !== action.payload._id) //keep workouts in array if they're not equal
             }
+        case 'PATCH_WORKOUT':
+            return {
+                workouts: [action.payload]
+            }
         default:
             return state
     }
