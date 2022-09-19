@@ -3,6 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const workoutRoutes = require('./routes/workouts');
+const userRoutes = require('./routes/user');
 
 const app = express();  //express app, logicno
 
@@ -11,10 +12,12 @@ app.use((req, res, next) => {
     console.log(req.path, req.method);
     next();
 });
+
 app.use(express.json());//middleware that parses data from every request we send and attaches it to req object that we can use later on
 
 //routes
 app.use('/api/workouts', workoutRoutes);
+app.use('/api/user', userRoutes);
 
 //db connection, async
 mongoose.connect(process.env.MONGO_URI)
