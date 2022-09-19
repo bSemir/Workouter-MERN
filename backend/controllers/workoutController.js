@@ -10,7 +10,7 @@ const getWorkouts = async (req, res) => {
 //GET a single workout
 const getWorkout = async (req, res) => {
     const { id } = req.params;
-
+    // console.log('test');
     if (!mongoose.Types.ObjectId.isValid(id)) { //needed this check bc if we send some random id, it'll crash 
         return res.status(404).json({ error: 'no such workout' });
     }
@@ -86,10 +86,25 @@ const updateWorkout = async (req, res) => {
     }
 }
 
+//search for a workout
+const searchWorkout = async (req, res) => {
+    const { data } = req.params;
+
+    // if (!mongoose.Types.ObjectId.isValid(id)) { //needed this check bc if we send some random id, it'll crash 
+    //     return res.status(404).json({ error: 'no such workout' });
+    // }
+
+    const workout = await Workout.find({ $text: { $search: data } });
+    if (!workout)
+        return res.status(404).json({ error: 'No such workout' });
+    res.status(200).json(workout);
+}
+
 module.exports = {
     createWorkout,
     getWorkout,
     getWorkouts,
     deleteWorkout,
-    updateWorkout
+    updateWorkout,
+    searchWorkout
 }

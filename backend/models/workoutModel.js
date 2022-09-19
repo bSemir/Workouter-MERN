@@ -17,5 +17,8 @@ const workoutSchema = new Schema({
     }
 }, { timestamps: true });
 
+workoutSchema.index({ '$**': 'text' });
+//workoutSchema.index({ reps: 'Number' }); aint working
+
 module.exports = mongoose.model('Workout', workoutSchema); //model
 

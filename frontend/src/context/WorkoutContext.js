@@ -20,6 +20,11 @@ export const workoutsReducer = (state, action) => {
             return {
                 workouts: [action.payload]
             }
+        case 'SEARCH_WORKOUTS':
+            return {
+                workouts: null, //no-duplicate keys warning in console
+                workouts: action.payload
+            }
         default:
             return state
     }
