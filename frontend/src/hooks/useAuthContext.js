@@ -8,5 +8,5 @@ export const useAuthContext = () => {
     if (!context)
         throw Error('useAuthContext must be used inside an useAuthContextProvider!');
 
-    return context;
+    return context; //it has user property and dispatch function
 }
