@@ -9,7 +9,11 @@ const {
     searchWorkout
 } = require('../controllers/workoutController');
 
+const requireAuth = require('../middleware/requireAuth');
+
 const router = express.Router();
+//now, requireAuth will go through every workout route 
+router.use(requireAuth);
 
 //GET all workouts
 router.get('/', getWorkouts);
