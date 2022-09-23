@@ -95,6 +95,8 @@ const WorkoutEdit = () => {
             />
 
             <button>Update</button>
+            {/* TODO: position this guy better */}
+            <span id="cancel" className="material-symbols-outlined" onClick={() => console.log('go back')}>cancel</span>
             {error && <div className='error'>{error}</div>}
         </form>
     )
