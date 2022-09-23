@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useWorkoutsContext } from '../hooks/useWorkoutsContext';
 import { useNavigate, useParams } from "react-router-dom";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 const WorkoutEdit = () => {
     const [title, setTitle] = useState('');
@@ -12,10 +13,15 @@ const WorkoutEdit = () => {
 
     const navigate = useNavigate();
     const { dispatch } = useWorkoutsContext();
+    const { user } = useAuthContext();
 
     useEffect(() => {
         const fetchWorkouts = async () => {
-            const response = await fetch('/api/workouts/' + id,);
+            const response = await fetch('/api/workouts/' + id, {
+                headers: {
+                    'Authorization': `Bearer ${user.token}`
+                }
+            });
             const json = await response.json();
             //json is array of objects
             if (response.ok) {
@@ -25,8 +31,10 @@ const WorkoutEdit = () => {
                 setReps(json.reps);
             }
         }
-        fetchWorkouts();
-    }, [dispatch, id]) //whenever dispatch f changes, it reruns useEffect
+        if (user) {
+            fetchWorkouts();
+        }
+    }, [dispatch, id, user]) //whenever dispatch, id, user change, it reruns useEffect
 
     const handleUpdate = async (e) => {
         e.preventDefault();
@@ -37,7 +45,8 @@ const WorkoutEdit = () => {
             method: 'PATCH',
             body: JSON.stringify(data),
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${user.token}`
             }
         });
 
