@@ -94,8 +94,8 @@ const WorkoutEdit = () => {
                 className={emptyFields.includes('reps') ? 'error' : ''}
             />
 
-            <button>Update</button>
-            {/* TODO: position this guy better */}
+            <button id='update'>Update</button>
+            {/* TODO: position this guy better and add proper functionality*/}
             <span id="cancel" className="material-symbols-outlined" onClick={() => console.log('go back')}>cancel</span>
             {error && <div className='error'>{error}</div>}
         </form>

@@ -70,7 +70,7 @@ const Home = () => {
                         type="text"
                         id="search_input"
                         name="search"
-                        placeholder="Search by workouts title"
+                        placeholder="Search workout by its title"
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
                     />

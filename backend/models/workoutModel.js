@@ -14,6 +14,10 @@ const workoutSchema = new Schema({
     load: {
         type: Number,
         required: true
+    },
+    user_id: { //every workout must be associated with a user
+        type: String,
+        required: true
     }
 }, { timestamps: true });
 
