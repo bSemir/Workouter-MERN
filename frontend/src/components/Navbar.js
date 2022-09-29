@@ -15,7 +15,7 @@ const Navbar = () => {
     <header>
       <div className="container">
         <Link to="/">
-          <h1>Workouter</h1>
+          <h1>Workoutter</h1>
         </Link>
         <nav>
           {user && ( //only if we have value in user, output this!
